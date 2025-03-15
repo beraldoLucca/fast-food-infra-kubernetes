@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: c-fast-food
-          image: <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/fast-food:latest
+          image: 385515961485.dkr.ecr.us-east-1.amazonaws.com/fast-food:latest
           ports:
             - containerPort: 8080
           resources:

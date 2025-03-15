@@ -1,0 +1,42 @@
+name: Provide Infra Kubernetes
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Apply Terraform
+        run: |
+          cd terraform/
+          terraform init
+          terraform apply -auto-approve
+
+      - name: Update Kubernetes
+        run: |
+          aws eks update-kubeconfig --name test-fiap --region us-east-1
+          kubectl apply -f k8s/
+
+#      - name: Dispatches Deploy on Infra RDS Repository
+#        run: |
+#          curl -X POST -H "Authorization: token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}" \
+#          -H "Accept: application/vnd.github.v3+json" \
+#          https://api.github.com/repos/beraldoLucca/fast-food-rds-infra/actions/workflows/deploy.yml/dispatches \
+#          -d '{"ref":"main"}'

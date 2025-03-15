@@ -31,7 +31,7 @@ jobs:
 
       - name: Update Kubernetes
         run: |
-          aws eks update-kubeconfig --name test-fiap --region us-east-1
+          aws eks update-kubeconfig --name fast-food-k8s --region us-east-1
           kubectl apply -f k8s/
 
 #      - name: Dispatches Deploy on Infra RDS Repository

@@ -17,6 +17,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
       - name: Install Terraform
@@ -33,9 +34,9 @@ jobs:
           aws eks update-kubeconfig --name test-fiap --region us-east-1
           kubectl apply -f k8s/
 
-      - name: Dispatches Deploy on Infra RDS Repository
-        run: |
-          curl -X POST -H "Authorization: token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/beraldoLucca/fast-food-rds-infra/actions/workflows/deploy.yml/dispatches \
-          -d '{"ref":"main"}'
+#      - name: Dispatches Deploy on Infra RDS Repository
+#        run: |
+#          curl -X POST -H "Authorization: token ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}" \
+#          -H "Accept: application/vnd.github.v3+json" \
+#          https://api.github.com/repos/beraldoLucca/fast-food-rds-infra/actions/workflows/deploy.yml/dispatches \
+#          -d '{"ref":"main"}'

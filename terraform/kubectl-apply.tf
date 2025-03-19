@@ -2,7 +2,7 @@ resource "null_resource" "k8s_apply" {
   provisioner "local-exec" {
     command = <<EOT
       aws eks update-kubeconfig --name fast-food-k8s --region us-east-1
-      kubectl apply -f k8s/
+      cd ../ && kubectl apply -f k8s/
       sleep 60
     EOT
   }

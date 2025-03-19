@@ -7,7 +7,7 @@ variable "principalArn" {
 }
 
 variable "nodeName" {
-  default = "fast-food-ng"
+  default = "fast-food-ng-2"
 }
 
 variable "subnetA" {

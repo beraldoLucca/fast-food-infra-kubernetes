@@ -1,6 +1,6 @@
 data "kubernetes_service" "fast_food_service" {
   metadata {
-    name      = "fast-food-service"
+    name      = "loadbalancer-svc-fast-food"
     namespace = "default"
   }
   depends_on = [null_resource.k8s_apply]

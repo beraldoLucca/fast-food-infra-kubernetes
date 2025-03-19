@@ -9,7 +9,7 @@ provider "kubernetes" {
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = "fast-food-k8s"
+  name = "fast-food-k8s-4"
 }
 
 data "aws_eks_cluster_auth" "cluster" {

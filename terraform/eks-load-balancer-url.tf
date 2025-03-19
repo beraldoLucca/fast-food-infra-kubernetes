@@ -3,7 +3,7 @@ data "kubernetes_service" "fast_food_service" {
     name      = "fast-food-service"
     namespace = "default"
   }
-  depends_on = [aws_eks_cluster.fiap]
+  depends_on = [null_resource.k8s_apply]
 }
 
 output "load_balancer_url" {

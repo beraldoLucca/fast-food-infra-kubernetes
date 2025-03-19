@@ -4,7 +4,7 @@ resource "aws_eks_node_group" "node" {
   node_role_arn   = var.labRole
   subnet_ids      = [var.subnetA, var.subnetB, var.subnetC]
   disk_size       = 50
-  instance_types  = ["t3.micro"]
+  instance_types  = ["t3.medium"]
 
   scaling_config {
     desired_size = 1

@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "eks_service_url" {
-  name        = "eks-service-url"
+  name        = "eks-service-url-2"
   depends_on = [data.kubernetes_service.fast_food_service]
   description = "Secret containing the URL of the EKS service load balancer"
 }

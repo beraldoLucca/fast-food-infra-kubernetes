@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "fiap" {
-  name     = "fast-food-k8s-5"
+  name     = "fast-food-k8s"
   role_arn = var.labRole
 
   vpc_config {

@@ -34,21 +34,3 @@ jobs:
           cd terraform/
           terraform init
           terraform apply -auto-approve
-
-      - name: Wait for Load Balancer URL
-        run: |
-          echo "Waiting for Load Balancer URL..."
-          for i in {1..10}; do
-            URL=$(kubectl get svc fast-food-service -n default -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' 2>/dev/null)
-            if [[ -n "$URL" ]]; then
-              echo "Service URL: $URL"
-              echo "LB_URL=$URL" >> $GITHUB_ENV
-              break
-            fi
-            echo "Still waiting..."
-            sleep 30
-          done
-
-      - name: Output Load Balancer URL
-        run: |
-          echo "Load Balancer URL: $LB_URL"

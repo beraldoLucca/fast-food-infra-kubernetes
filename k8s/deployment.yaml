@@ -22,17 +22,17 @@ spec:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret-5
+                  name: aws-secret-6
                   key: accessKey
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret-5
+                  name: aws-secret-6
                   key: secretKey
             - name: AWS_SESSION_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret-5
+                  name: aws-secret-6
                   key: sessionKey
 
   replicas: 1

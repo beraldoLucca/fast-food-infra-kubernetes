@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "eks_service_url" {
-  name        = "eks-service-url-4"
+  name        = "eks-service-url-5"
   depends_on = [data.kubernetes_service.fast_food_service]
   description = "Secret containing the URL of the EKS service load balancer"
 }
@@ -13,17 +13,16 @@ resource "aws_secretsmanager_secret_version" "eks_service_url_version" {
   depends_on = [data.kubernetes_service.fast_food_service]
 }
 
-resource "kubernetes_secret" "aws_credentials" {
-  metadata {
-    name      = "aws-secret"
-    namespace = "default" # ou outro namespace onde a aplicação roda
-  }
+resource "aws_secretsmanager_secret" "aws_credentials" {
+  name        = "aws-secret"
+  description = "AWS credentials for EKS pods"
+}
 
-  data = {
+resource "aws_secretsmanager_secret_version" "aws_credentials_version" {
+  secret_id     = aws_secretsmanager_secret.aws_credentials.id
+  secret_string = jsonencode({
     accessKey  = var.AWS_ACCESS_KEY_ID
     secretKey  = var.AWS_SECRET_ACCESS_KEY
     sessionKey = var.AWS_SESSION_TOKEN
-  }
-
-  type = "Opaque"
+  })
 }

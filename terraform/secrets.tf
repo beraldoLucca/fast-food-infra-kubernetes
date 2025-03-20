@@ -14,7 +14,7 @@ resource "aws_secretsmanager_secret_version" "eks_service_url_version" {
 }
 
 resource "aws_secretsmanager_secret" "aws_credentials" {
-  name        = "aws-secret-4"
+  name        = "aws-secret-5"
   description = "AWS credentials for EKS pods"
 }
 

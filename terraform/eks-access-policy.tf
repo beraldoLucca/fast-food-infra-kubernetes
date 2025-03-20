@@ -8,19 +8,14 @@ resource "aws_eks_access_policy_association" "policy" {
   }
 }
 
-resource "aws_iam_role" "secrets_manager_role" {
-  name = "eks-secrets-manager-role"
+resource "aws_eks_access_policy_association" "secrets_policy" {
+  cluster_name  = aws_eks_cluster.fiap.name
+  policy_arn    = aws_iam_policy.secrets_manager_policy.arn  # Aqui usamos a policy criada acima
+  principal_arn = var.principalArn  # Essa variável deve apontar para a ARN da role do EKS
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Effect = "Allow"
-      Principal = {
-        Service = "eks.amazonaws.com"
-      }
-      Action = "sts:AssumeRole"
-    }]
-  })
+  access_scope {
+    type = "cluster"
+  }
 }
 
 resource "aws_iam_policy" "secrets_manager_policy" {
@@ -35,9 +30,4 @@ resource "aws_iam_policy" "secrets_manager_policy" {
       Resource = aws_secretsmanager_secret.aws_credentials.arn
     }]
   })
-}
-
-resource "aws_iam_role_policy_attachment" "attach_secrets_manager_policy" {
-  role       = aws_iam_role.secrets_manager_role.name
-  policy_arn = aws_iam_policy.secrets_manager_policy.arn
 }

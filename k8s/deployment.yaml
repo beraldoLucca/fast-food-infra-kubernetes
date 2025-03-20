@@ -10,7 +10,6 @@ spec:
       labels:
         app: fast-food-deployment
     spec:
-      serviceAccountName: eks-secrets-manager-role
       containers:
         - name: c-fast-food
           image: 385515961485.dkr.ecr.us-east-1.amazonaws.com/fast-food:latest

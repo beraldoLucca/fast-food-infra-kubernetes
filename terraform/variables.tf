@@ -33,3 +33,15 @@ variable "accessConfig" {
 variable "policyArn" {
   default = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
 }
+
+variable "AWS_ACCESS_KEY_ID" {
+  type = string
+}
+
+variable "AWS_SECRET_ACCESS_KEY" {
+  type = string
+}
+
+variable "AWS_SESSION_TOKEN" {
+  type = string
+}

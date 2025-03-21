@@ -1,9 +1,8 @@
 name: Provide Infra Kubernetes
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 
 jobs:
   terraform:

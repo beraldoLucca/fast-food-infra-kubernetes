@@ -42,5 +42,5 @@ resource "kubernetes_secret" "aws_k8s_secret" {
 
   type = "Opaque"
 
-  depends_on = [null_resource.configure_kubeconfig] O
+  depends_on = [null_resource.configure_kubeconfig]
 }

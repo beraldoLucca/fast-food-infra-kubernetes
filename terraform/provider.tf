@@ -23,3 +23,24 @@ resource "null_resource" "configure_kubeconfig" {
     command = "aws eks update-kubeconfig --name ${aws_eks_cluster.fiap.name} --region us-east-1"
   }
 }
+
+data "aws_secretsmanager_secret" "aws_credentials" {
+  name = "aws-secret-8"
+}
+
+data "aws_secretsmanager_secret_version" "aws_credentials_version" {
+  secret_id = data.aws_secretsmanager_secret.aws_credentials.id
+}
+
+resource "kubernetes_secret" "aws_k8s_secret" {
+  metadata {
+    name      = "aws-secret-8"
+    namespace = "default"
+  }
+
+  data = jsondecode(data.aws_secretsmanager_secret_version.aws_credentials_version.secret_string)
+
+  type = "Opaque"
+
+  depends_on = [null_resource.configure_kubeconfig] O
+}

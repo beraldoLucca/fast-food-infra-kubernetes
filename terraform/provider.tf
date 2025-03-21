@@ -25,11 +25,13 @@ resource "null_resource" "configure_kubeconfig" {
 }
 
 data "aws_secretsmanager_secret" "aws_credentials" {
-  name = "aws-secret-8"
+  name = aws_secretsmanager_secret.aws_credentials.name
+  depends_on = [aws_secretsmanager_secret.aws_credentials]
 }
 
 data "aws_secretsmanager_secret_version" "aws_credentials_version" {
-  secret_id = data.aws_secretsmanager_secret.aws_credentials.id
+  secret_id = aws_secretsmanager_secret.aws_credentials.id
+  depends_on = [aws_secretsmanager_secret_version.aws_credentials_version]
 }
 
 resource "kubernetes_secret" "aws_k8s_secret" {
@@ -42,5 +44,6 @@ resource "kubernetes_secret" "aws_k8s_secret" {
 
   type = "Opaque"
 
-  depends_on = [null_resource.configure_kubeconfig]
+  depends_on = [null_resource.configure_kubeconfig,
+    aws_secretsmanager_secret_version.aws_credentials_version]
 }

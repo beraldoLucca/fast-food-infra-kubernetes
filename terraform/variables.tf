@@ -11,19 +11,19 @@ variable "nodeName" {
 }
 
 variable "subnetA" {
-  default = "subnet-0aecd3951ac893b18"
+  default = "subnet-085288d905e582249"
 }
 
 variable "subnetB" {
-  default = "subnet-0d659753009c6728e"
+  default = "subnet-02eb16f645385bf0e"
 }
 
 variable "subnetC" {
-  default = "subnet-01751db28720e4b6a"
+  default = "subnet-0a628c5da03ff2107"
 }
 
 variable "sgId" {
-  default = "sg-0ffae49eff406a775"
+  default = "sg-0318ebd31e822438c"
 }
 
 variable "accessConfig" {

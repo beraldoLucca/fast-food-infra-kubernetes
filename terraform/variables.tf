@@ -1,9 +1,9 @@
 variable "labRole" {
-  default = "arn:aws:iam::385515961485:role/LabRole"
+  default = "arn:aws:iam::528465521739:role/LabRole"
 }
 
 variable "principalArn" {
-  default = "arn:aws:iam::385515961485:role/voclabs"
+  default = "arn:aws:iam::528465521739:role/voclabs"
 }
 
 variable "nodeName" {

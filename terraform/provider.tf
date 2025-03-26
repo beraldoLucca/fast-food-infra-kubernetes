@@ -36,7 +36,7 @@ data "aws_secretsmanager_secret_version" "aws_credentials_version" {
 
 resource "kubernetes_secret" "aws_k8s_secret" {
   metadata {
-    name      = "aws-secret-3"
+    name      = "aws-secret-4"
     namespace = "default"
   }
 
